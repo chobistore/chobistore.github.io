@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chobistore — Top Up Robux, Gamepass & Bloxburg</title>
+<meta name="description" content="Top up Robux, Gamepass Pasar Setan, dan Bloxburg dengan aman, cepat, dan terpercaya. Tanpa password, proses cepat, harga jelas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chobistore — Top Up Robux, Gamepass & Bloxburg">
+<meta property="og:description" content="Harga jelas, tanpa password, proses cepat. 140+ transaksi sejak Agustus 2026.">
+<meta property="og:url" content="https://chobistore.github.io">
+<meta property="og:image" content="https://chobistore.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F2A9C9">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   KONFIGURASI — ubah di sini saja
+   ============================================================ */
+:root{
+  --bg:#F7F0FC; --bg2:#EFE3FA;
+  --card:#FFFFFF; --card2:#FBF5FE;
+  --ink:#4A2458; --ink2:#7A5C8C;
+  --accent:#F2A9C9;       /* permukaan pink: tombol, tab aktif, nomor langkah */
+  --on-accent:#693274;    /* teks di ATAS permukaan pink */
+  --accent-text:#B5407C;  /* teks/ikon pink di atas latar terang */
+  --accent-d:#693274;
+  --pill-a:#EADDF8; --pill-b:#FBDCEC;
+  --line:#E7D7F3;
+  --ok:#2E7D5B; --ok-bg:#DFF3E8;
+  --warn:#8A5A12; --warn-bg:#FDF0D5;
+  --shadow:0 2px 10px rgba(105,50,116,.07), 0 10px 30px rgba(105,50,116,.06);
+  --r:18px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1222; --bg2:#231730;
+    --card:#271A35; --card2:#2E1F3D;
+    --ink:#F2E6FA; --ink2:#BCA6CC;
+    --accent:#F2A9C9; --on-accent:#3A1430; --accent-text:#F4A8C9;
+    --accent-d:#E3C9F5;
+    --pill-a:#3A2750; --pill-b:#45243C;
+    --line:#3C2A4E;
+    --ok:#8FE0B8; --ok-bg:#1E3A2C;
+    --warn:#F0CE8A; --warn-bg:#3A2D14;
+    --shadow:0 2px 10px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1222; --bg2:#231730;
+  --card:#271A35; --card2:#2E1F3D;
+  --ink:#F2E6FA; --ink2:#BCA6CC;
+  --accent:#F2A9C9; --on-accent:#3A1430; --accent-text:#F4A8C9;
+  --accent-d:#E3C9F5;
+  --pill-a:#3A2750; --pill-b:#45243C;
+  --line:#3C2A4E;
+  --ok:#8FE0B8; --ok-bg:#1E3A2C;
+  --warn:#F0CE8A; --warn-bg:#3A2D14;
+  --shadow:0 2px 10px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Fredoka',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg); color:var(--ink);
+  font-size:16px; line-height:1.5;
+  padding-bottom:84px;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:inherit}
+
+/* ---------- header ---------- */
+header{
+  background:
+    radial-gradient(900px 340px at 10% -10%, var(--pill-b) 0%, transparent 60%),
+    radial-gradient(800px 320px at 95% 0%, var(--pill-a) 0%, transparent 62%),
+    var(--bg2);
+  padding:34px 0 28px; text-align:center; border-bottom:1px solid var(--line);
+}
+.logo{
+  font-size:clamp(34px,10vw,54px); font-weight:700; letter-spacing:-.5px;
+  margin:0; color:var(--accent-d); line-height:1.05;
+}
+.logo span{display:inline-block}
+.tag{margin:8px 0 0;color:var(--ink2);font-size:15px;font-weight:500}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.badge{
+  background:var(--card); border:1px solid var(--line); color:var(--ink);
+  padding:7px 13px; border-radius:999px; font-size:13px; font-weight:500;
+  box-shadow:var(--shadow);
+}
+
+/* ---------- notice ---------- */
+.notice{
+  margin:16px auto 0; max-width:828px;
+  background:var(--warn-bg); color:var(--warn);
+  border-radius:14px; padding:12px 15px; font-size:14px; font-weight:500;
+  display:flex; gap:9px; align-items:flex-start;
+}
+.notice b{font-weight:600}
+
+/* ---------- tabs ---------- */
+.tabs{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px) saturate(1.2);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);
+  border-bottom:1px solid var(--line); margin-top:20px;
+}
+.tabs-in{display:flex;gap:6px;max-width:860px;margin:0 auto;padding:10px 16px;overflow-x:auto;scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto; border:1px solid var(--line); background:var(--card);
+  color:var(--ink2); font-family:inherit; font-size:14px; font-weight:600;
+  padding:9px 15px; border-radius:999px; cursor:pointer; white-space:nowrap;
+  transition:.15s;
+}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* ---------- panel ---------- */
+.panel{display:none;padding-top:20px}
+.panel.on{display:block}
+.panel-head{margin:0 0 4px;font-size:20px;font-weight:600}
+.panel-sub{margin:0 0 14px;color:var(--ink2);font-size:14px}
+
+.grid{display:grid;gap:9px;grid-template-columns:1fr}
+@media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
+
+.item{
+  display:flex;align-items:center;gap:12px;width:100%;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:13px 14px; cursor:pointer; text-align:left;
+  font-family:inherit; color:inherit; box-shadow:var(--shadow);
+  transition:transform .12s, border-color .12s;
+}
+.item:hover{border-color:var(--accent)}
+.item:active{transform:scale(.985)}
+.item.sel{border-color:var(--accent);border-width:2px;background:var(--card2);padding:12px 13px}
+.item.sel .pr{background:var(--accent);color:var(--on-accent)}
+.cek{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:var(--accent);color:var(--on-accent);
+  display:none;place-items:center;font-size:13px;font-weight:700;line-height:1;
+}
+.item.sel .cek{display:grid}
+.qty{
+  flex:0 0 auto; min-width:76px; text-align:center;
+  background:var(--pill-a); border-radius:12px; padding:8px 10px;
+  font-weight:600; font-size:15px; color:var(--accent-d);
+}
+.nm{flex:1 1 auto;min-width:0;font-weight:500;font-size:15px;overflow:hidden}
+.nm small{display:block;color:var(--ink2);font-weight:400;font-size:12.5px;margin-top:1px}
+.pr{
+  flex:0 0 auto; margin-left:auto; background:var(--pill-b); border-radius:12px;
+  padding:8px 12px; font-weight:600; font-size:15px; color:var(--accent-d);
+  white-space:nowrap;
+}
+
+/* ---------- sections ---------- */
+section{padding:30px 0 4px}
+h2{font-size:20px;font-weight:600;margin:0 0 14px}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:10px}
+.steps li{
+  counter-increment:s; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r); padding:13px 15px 13px 52px; position:relative;
+  font-size:15px; box-shadow:var(--shadow);
+}
+.steps li::before{
+  content:counter(s); position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);
+  display:grid;place-items:center;font-size:14px;font-weight:700;
+}
+.steps b{font-weight:600}
+
+details{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:13px 15px; margin-bottom:9px; box-shadow:var(--shadow);
+}
+summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';float:right;color:var(--accent-text);font-weight:700}
+details[open] summary::after{content:'–'}
+details p{margin:9px 0 0;color:var(--ink2);font-size:14.5px}
+
+/* ---------- cta ---------- */
+.cta-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line); padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+}
+.cta-in{max-width:860px;margin:0 auto;display:flex;gap:9px}
+.btn{
+  flex:1 1 0; border:none; border-radius:14px; padding:14px 12px;
+  font-family:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  text-decoration:none; transition:.15s;
+}
+.btn-main{background:var(--accent);color:var(--on-accent);border:2px solid transparent}
+.btn-alt{background:var(--card);color:var(--ink);border:2px solid var(--line);
+  flex:0 0 auto;padding:14px 18px;display:none}
+.btn-alt.on{display:flex}
+.btn-main{flex-direction:column;gap:1px;line-height:1.15}
+.btn-main .sub{font-weight:500;font-size:12.5px;opacity:.85}
+.btn:active{transform:scale(.98)}
+
+/* ---------- toast ---------- */
+#toast{
+  position:fixed;left:50%;bottom:92px;transform:translate(-50%,16px);
+  background:var(--ok-bg);color:var(--ok);border-radius:14px;
+  padding:12px 17px;font-size:14.5px;font-weight:600;z-index:60;
+  opacity:0;pointer-events:none;transition:.22s; max-width:92vw; text-align:center;
+  box-shadow:var(--shadow);
+}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+
+.stok{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--ok-bg);color:var(--ok);
+  border-radius:14px;padding:11px 14px;font-size:14px;font-weight:600;margin:0 0 14px}
+.stok.habis{background:var(--warn-bg);color:var(--warn)}
+.stok small{font-weight:400;opacity:.85;font-size:12.5px}
+.item.soft{opacity:.5}
+.item.soft .pr{background:var(--pill-a)}
+.tagx{flex:0 0 auto;background:var(--warn-bg);color:var(--warn);border-radius:9px;
+  padding:4px 8px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.calc{background:var(--card2);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px;margin:0 0 16px;box-shadow:var(--shadow)}
+.calc h3{margin:0 0 4px;font-size:16px;font-weight:600}
+.calc p.hint{margin:0 0 12px;color:var(--ink2);font-size:13.5px}
+.calc-row{display:flex;gap:9px;align-items:stretch}
+.calc input{flex:1 1 auto;min-width:0;font-family:inherit;font-size:16px;font-weight:600;
+  color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px}
+.calc input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.calc-out{margin-top:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px}
+.calc-out.on{display:flex}
+.calc-out .big{font-size:20px;font-weight:700;color:var(--accent-d)}
+.calc-out .lbl{color:var(--ink2);font-size:13.5px;flex:1 1 auto}
+.calc-msg{margin-top:10px;color:var(--warn);font-size:13.5px;font-weight:500;display:none}
+.calc-msg.on{display:block}
+footer{
+  margin-top:34px;padding:24px 0 30px;border-top:1px solid var(--line);
+  text-align:center;color:var(--ink2);font-size:13.5px
+}
+footer a{color:var(--accent-text);font-weight:600;text-decoration:none}
+.note{margin-top:8px;font-size:12.5px;opacity:.85}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1 class="logo">Chobistore</h1>
+    <p class="tag">Top up Robux, Gamepass &amp; Bloxburg — aman, cepat, terpercaya</p>
+    <div class="badges">
+      <div class="badge">💜 140+ transaksi</div>
+      <div class="badge">📅 Sejak Agustus 2026</div>
+      <div class="badge">🔒 Tanpa password akun</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap"><div class="notice" id="notice" hidden></div></div>
+
+<nav class="tabs">
+  <div class="tabs-in" role="tablist" id="tabs"></div>
+</nav>
+
+<main class="wrap" id="panels"></main>
+
+<div class="wrap">
+  <section>
+    <h2>Cara order</h2>
+    <ol class="steps">
+      <li><b>Ketuk paket</b> yang kamu mau — boleh lebih dari satu, dari tab mana pun</li>
+      <li>Tekan tombol <b>Order</b> di bawah — daftar pesanan tersalin dan TikTok terbuka</li>
+      <li>Tekan <b>Message</b> di profil <b>@chocobi31</b>, lalu paste pesannya</li>
+      <li>Transfer sesuai nominal, kirim bukti transfer dan username Roblox kamu</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Pertanyaan umum</h2>
+    <details><summary>Perlu kasih password akun Roblox?</summary>
+      <p><b>Tidak pernah.</b> Cukup username Roblox kamu saja. Siapa pun yang meminta passwordmu — termasuk yang mengaku admin — sedang mencoba menipu.</p></details>
+    <details><summary>Berapa lama prosesnya?</summary>
+      <p>Biasanya langsung setelah pembayaran dikonfirmasi, selama stok tersedia dan admin sedang online.</p></details>
+    <details><summary>Kenapa paket kecil harganya lebih mahal per robux?</summary>
+      <p>Biaya kirim dan proses tiap transaksi sama saja, mau 10 robux atau 1.000. Makin besar paketnya, makin murah per robux-nya.</p></details>
+    <details><summary>Harganya bisa berubah?</summary>
+      <p>Bisa, mengikuti harga robux resmi dari Roblox. Harga yang berlaku adalah yang tertera di halaman ini saat kamu order.</p></details>
+    <details><summary>Bagaimana kalau stok sedang kosong?</summary>
+      <p>Akan ada pemberitahuan di bagian atas halaman ini. Kamu tetap bisa chat untuk tanya perkiraan waktu restock.</p></details>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>TikTok <a href="https://www.tiktok.com/@chocobi31" target="_blank" rel="noopener">@chocobi31</a></p>
+    <p class="note">Harga dapat berubah sewaktu-waktu mengikuti harga resmi Roblox.<br>Chobistore bukan bagian dari Roblox Corporation.</p>
+  </div>
+</footer>
+
+<div class="cta-bar">
+  <div class="cta-in">
+    <button class="btn btn-alt" id="clearBtn" type="button" title="Kosongkan pilihan">✕</button>
+    <a class="btn btn-main" id="orderBtn" href="https://www.tiktok.com/@chocobi31" target="_blank" rel="noopener">Order via TikTok</a>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   DATA & KONFIGURASI
+   Ubah angka di sini saja. Jangan sentuh bagian bawah.
+   ============================================================ */
+const CONFIG = {
+  toko: "Chobistore",
+  tiktok: "chocobi31",
+
+  // Banner pemberitahuan di atas halaman. aktif:false untuk menyembunyikan.
+  banner: {
+    aktif: true,
+    teks: "<b>Paket Robux sedang restock.</b> Gamepass Pasar Setan masih ready. Chat admin untuk perkiraan waktu."
+  },
+
+  // SISA STOK dalam robux. Perbarui tiap kali stok berubah.
+  // Item yang butuh robux lebih banyak dari stok otomatis ditandai "stok kurang".
+  stok: {
+    // Dua saklar terpisah:
+    tampilkanSisa: false,  // true = tampilkan strip "Stok tersedia: X Robux"
+    tandaiKurang: true,    // true = item yang melebihi stok diberi label pre-order
+    diperbarui: "5 Okt 2026",
+    robux: 0,          // stok untuk paket robux langsung
+    pasarsetan: 2973,  // stok untuk gift gamepass Pasar Setan
+    bloxburg: 2973     // stok Bloxburg (kolam robux yang sama dengan Pasar Setan)
+  },
+
+  // Harga custom: bagian ratusan dihitung per robux, sisa di bawah 100 pakai tabel kecil.
+  // Contoh 150 robux = (100 x 165) + 50 -> 16.500 + 10.000 = 26.500
+  custom: {
+    aktif: true,
+    perRobux: 165,
+    min: 10,
+    maks: 10000,
+    kecil: {0:0, 10:2500, 20:4000, 30:6000, 40:8000, 50:10000, 60:12000, 70:13500, 80:14500, 90:15500},
+    perRobuxKecil: 200,
+    bulatkan: 500
+  }
+};
+
+const DATA = {
+  robux: {
+    label: "Robux",
+    judul: "Paket Robux",
+    sub: "Dikirim langsung ke akun Roblox kamu. Cukup username, tanpa password.",
+    satuan: "Robux",
+    items: [
+      [10, 2500], [20, 4000], [30, 6000], [40, 8000], [50, 10000],
+      [60, 12000], [70, 13500], [80, 14500], [90, 15500], [100, 16500],
+      [200, 33000], [300, 49500], [400, 66000], [500, 82500], [600, 99000],
+      [700, 115500], [800, 132000], [900, 148500], [1000, 165000]
+    ]
+  },
+  pasarsetan: {
+    label: "Pasar Setan",
+    judul: "Gamepass Pasar Setan",
+    sub: "Dikirim sebagai gift di dalam map. Pastikan kamu sedang online di game.",
+    items: [
+      ["Custom Title", 799, 128000], ["VIP Gamepass", 400, 64000],
+      ["Peternak Handal", 250, 40000], ["Juru Masak Bayangan", 249, 40000],
+      ["Kandang Luas", 150, 24000], ["Boom Box Tools", 149, 24000],
+      ["x2 Serpihan Arqwah", 149, 24000], ["Nampan Bertuah", 129, 21000],
+      ["Palung Bertuah", 99, 16000], ["Slot Masak +5", 99, 16000],
+      ["Koin +50%", 99, 16000], ["Memasak Lebih Cepat", 70, 14000],
+      ["EXP +50%", 50, 10000], ["2x Loot", 50, 10000],
+      ["Tungku Setan", 49, 10000], ["Tungku Berkah", 39, 8000]
+    ]
+  },
+  bloxburg: {
+    label: "Bloxburg",
+    judul: "Bloxburg",
+    sub: "Gamepass dan Bloxbux untuk Welcome to Bloxburg.",
+    groups: [
+      { nama: "Gamepass", items: [
+        ["Basements", 90, 15000], ["Marvelous Mood", 162, 26000],
+        ["Advanced Placing", 180, 29000], ["Large Plot", 225, 36000],
+        ["Excellent Employee", 270, 43500], ["Multiple Floors", 270, 43500],
+        ["Premium", 360, 58000], ["Transform Plus", 540, 86500]
+      ]},
+      { nama: "Bloxbux", items: [
+        ["50 Bloxbux", 14, 3000], ["250 Bloxbux", 63, 13000],
+        ["500 Bloxbux", 108, 17500], ["2.500 Bloxbux", 473, 76000],
+        ["5.000 Bloxbux", 878, 140500], ["25.000 Bloxbux", 4050, 648000]
+      ]}
+    ]
+  }
+};
+
+/* ============================================================
+   Mesin halaman — tidak perlu diubah saat memperbarui harga/stok
+   ============================================================ */
+const rp  = n => "Rp" + n.toLocaleString("id-ID");
+const num = n => n.toLocaleString("id-ID");
+const TIKTOK = "https://www.tiktok.com/@" + CONFIG.tiktok;
+
+/* ---------- daftar pesanan ---------- */
+const keranjang = [];                       // {key, nama, harga, pre}
+const idx = k => keranjang.findIndex(x => x.key === k);
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("on");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>t.classList.remove("on"), 2200);
+}
+
+/* salin sinkron dulu: lebih aman saat disusul pindah halaman ke TikTok */
+function copySync(txt){
+  try{
+    const ta = document.createElement("textarea");
+    ta.value = txt; ta.setAttribute("readonly","");
+    ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, txt.length);
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    if(ok) return true;
+  }catch(e){}
+  try{
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt); return true; }
+  }catch(e){}
+  return false;
+}
+
+function pesanOrder(){
+  if(!keranjang.length) return "Halo " + CONFIG.toko + ", saya mau tanya-tanya dulu.";
+  if(keranjang.length === 1){
+    const i = keranjang[0];
+    return "Halo " + CONFIG.toko + ", saya mau order " + i.nama + " \u2014 " + rp(i.harga) +
+           (i.pre ? " (pre-order, menunggu stok)" : "");
+  }
+  let t = "Halo " + CONFIG.toko + ", saya mau order:\n";
+  keranjang.forEach(i => { t += "\u2022 " + i.nama + " \u2014 " + rp(i.harga) + (i.pre ? " (pre-order)" : "") + "\n"; });
+  t += "Total: " + rp(keranjang.reduce((a,i)=>a+i.harga, 0));
+  return t;
+}
+
+function perbaruiBilah(){
+  const btn = document.getElementById("orderBtn");
+  const clr = document.getElementById("clearBtn");
+  if(!keranjang.length){
+    btn.innerHTML = "Order via TikTok";
+    clr.classList.remove("on");
+  } else {
+    const tot = keranjang.reduce((a,i)=>a+i.harga, 0);
+    btn.innerHTML = "Order via TikTok<span class=\"sub\">" +
+                    keranjang.length + " item \u00b7 " + rp(tot) + "</span>";
+    clr.classList.add("on");
+  }
+}
+
+/* ---------- harga untuk jumlah robux bebas ---------- */
+function hargaCustom(n){
+  const c = CONFIG.custom;
+  const ratus = Math.floor(n/100)*100;
+  const sisa  = n - ratus;
+  let h = ratus * c.perRobux;
+  if(sisa > 0){
+    h += (sisa % 10 === 0 && c.kecil[sisa] !== undefined) ? c.kecil[sisa] : sisa * c.perRobuxKecil;
+  }
+  return Math.ceil(h / c.bulatkan) * c.bulatkan;
+}
+
+function stokDari(key){
+  const st = CONFIG.stok;
+  if(!st) return null;
+  if(!st.tampilkanSisa && !st.tandaiKurang) return null;
+  return (typeof st[key] === "number") ? st[key] : null;
+}
+const tandaiKurang  = () => !!(CONFIG.stok && CONFIG.stok.tandaiKurang);
+const tampilkanSisa = () => !!(CONFIG.stok && CONFIG.stok.tampilkanSisa);
+
+/* ---------- kartu item ---------- */
+function makeItem(key, nama, o, harga, stok){
+  const lebih  = (stok !== null && o.need && o.need > stok);
+  const kurang = lebih && tandaiKurang();
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "item" + (kurang ? " soft" : "");
+  if(o.qty){
+    const q = document.createElement("div"); q.className = "qty"; q.textContent = o.qty;
+    b.appendChild(q);
+  }
+  const n = document.createElement("div"); n.className = "nm";
+  n.textContent = o.nm;
+  if(kurang){
+    const sm = document.createElement("small");
+    sm.textContent = "pre-order"; sm.style.color = "var(--warn)";
+    n.appendChild(sm);
+  }
+  b.appendChild(n);
+  const ck = document.createElement("div"); ck.className = "cek"; ck.textContent = "\u2713";
+  b.appendChild(ck);
+  const p = document.createElement("div"); p.className = "pr"; p.textContent = rp(harga);
+  b.appendChild(p);
+
+  b.addEventListener("click", ()=>{
+    const i = idx(key);
+    if(i >= 0){
+      keranjang.splice(i,1); b.classList.remove("sel");
+      toast(nama + " dihapus");
+    } else {
+      keranjang.push({key, nama, harga, pre: lebih && tandaiKurang()});
+      b.classList.add("sel");
+      toast("\u2713 " + nama + " ditambahkan");
+    }
+    perbaruiBilah();
+  });
+  return b;
+}
+
+function buildGrid(list, kind, stok){
+  const g = document.createElement("div"); g.className = "grid";
+  list.forEach(row=>{
+    if(kind === "robux"){
+      const [jml, harga] = row;
+      g.appendChild(makeItem(kind+"|"+jml, num(jml) + " Robux",
+        {qty:num(jml), nm:"Robux", need:jml}, harga, stok));
+    } else {
+      const [nama, rbx, harga] = row;
+      g.appendChild(makeItem(kind+"|"+nama, nama, {qty:"", nm:nama, need:rbx||0}, harga, stok));
+    }
+  });
+  return g;
+}
+
+function stokStrip(stok){
+  const el = document.createElement("div");
+  const habis = stok <= 0;
+  el.className = "stok" + (habis ? " habis" : "");
+  el.innerHTML = habis
+    ? '<span>\u23F3</span><div>Stok sedang kosong \u2014 kamu tetap bisa pre-order, diproses begitu stok masuk. <small>Diperbarui ' + CONFIG.stok.diperbarui + '</small></div>'
+    : '<span>\u2705</span><div>Stok tersedia: ' + num(stok) + ' Robux <small>&nbsp;\u00B7 Diperbarui ' + CONFIG.stok.diperbarui + '</small></div>';
+  return el;
+}
+
+/* ---------- kalkulator jumlah bebas ---------- */
+function kalkulator(stok){
+  const c = CONFIG.custom;
+  const box = document.createElement("div"); box.className = "calc";
+  box.innerHTML =
+    '<h3>Jumlah lain?</h3>' +
+    '<p class="hint">Masukkan jumlah robux yang kamu mau, harganya muncul otomatis.</p>' +
+    '<div class="calc-row"><input id="cIn" type="number" inputmode="numeric" min="' + c.min + '" max="' + c.maks + '" placeholder="contoh: 150"></div>' +
+    '<div class="calc-out" id="cOut"><div class="big" id="cPrice"></div><div class="lbl" id="cLbl"></div>' +
+    '<button class="btn btn-main" id="cBtn" type="button" style="flex:0 0 auto;padding:11px 16px">Tambah</button></div>' +
+    '<div class="calc-msg" id="cMsg"></div>';
+
+  const inp = box.querySelector("#cIn"), out = box.querySelector("#cOut"),
+        pr = box.querySelector("#cPrice"), lbl = box.querySelector("#cLbl"),
+        btn = box.querySelector("#cBtn"), msg = box.querySelector("#cMsg");
+  let cur = 0, curH = 0;
+
+  function hitung(){
+    const v = parseInt(inp.value, 10);
+    msg.classList.remove("on"); out.classList.remove("on"); cur = 0;
+    if(!inp.value) return;
+    if(isNaN(v) || v < c.min){ msg.textContent = "Minimal " + c.min + " robux."; msg.classList.add("on"); return; }
+    if(v > c.maks){ msg.textContent = "Untuk di atas " + num(c.maks) + " robux, chat admin langsung ya."; msg.classList.add("on"); return; }
+    cur = v; curH = hargaCustom(v);
+    pr.textContent = rp(curH);
+    lbl.textContent = "untuk " + num(v) + " Robux";
+    out.classList.add("on");
+    if(stok !== null && v > stok && tandaiKurang()){
+      msg.textContent = tampilkanSisa()
+        ? "Stok saat ini " + num(stok) + " robux \u2014 jumlah ini jadi pre-order."
+        : "Jumlah ini melebihi stok saat ini \u2014 jadi pre-order, diproses begitu stok masuk.";
+      msg.classList.add("on");
+    }
+  }
+  inp.addEventListener("input", hitung);
+  btn.addEventListener("click", ()=>{
+    if(!cur) return;
+    const key = "custom|" + cur;
+    if(idx(key) >= 0){ toast(num(cur) + " Robux sudah ada di pesanan"); return; }
+    keranjang.push({key, nama: num(cur) + " Robux", harga: curH,
+                    pre: (stok !== null && cur > stok && tandaiKurang())});
+    perbaruiBilah();
+    toast("\u2713 " + num(cur) + " Robux ditambahkan");
+    inp.value = ""; out.classList.remove("on"); msg.classList.remove("on"); cur = 0;
+  });
+  return box;
+}
+
+/* ---------- susun halaman ---------- */
+(function build(){
+  const tabs = document.getElementById("tabs");
+  const panels = document.getElementById("panels");
+
+  Object.keys(DATA).forEach((k,i)=>{
+    const d = DATA[k];
+    const stok = stokDari(k);
+
+    const t = document.createElement("button");
+    t.className = "tab"; t.type = "button"; t.setAttribute("role","tab");
+    t.textContent = d.label; t.setAttribute("aria-selected", i===0 ? "true" : "false");
+    t.addEventListener("click", ()=>{
+      [...tabs.children].forEach(x=>x.setAttribute("aria-selected","false"));
+      t.setAttribute("aria-selected","true");
+      [...panels.children].forEach(x=>x.classList.remove("on"));
+      document.getElementById("p-"+k).classList.add("on");
+    });
+    tabs.appendChild(t);
+
+    const p = document.createElement("div");
+    p.className = "panel" + (i===0 ? " on" : ""); p.id = "p-"+k;
+    p.innerHTML = '<h2 class="panel-head">' + d.judul + '</h2><p class="panel-sub">' + d.sub + '</p>';
+    if(stok !== null && tampilkanSisa()) p.appendChild(stokStrip(stok));
+    if(k === "robux" && CONFIG.custom && CONFIG.custom.aktif) p.appendChild(kalkulator(stok));
+
+    if(d.groups){
+      d.groups.forEach(gr=>{
+        const h = document.createElement("p");
+        h.className = "panel-sub";
+        h.style.cssText = "font-weight:600;color:var(--ink);margin:18px 0 10px";
+        h.textContent = gr.nama;
+        p.appendChild(h); p.appendChild(buildGrid(gr.items, k, stok));
+      });
+    } else {
+      p.appendChild(buildGrid(d.items, k, stok));
+    }
+    panels.appendChild(p);
+  });
+
+  if(CONFIG.banner && CONFIG.banner.aktif){
+    const n = document.getElementById("notice");
+    n.innerHTML = "<span>\uD83D\uDCE6</span><div>" + CONFIG.banner.teks + "</div>";
+    n.hidden = false;
+  }
+
+  /* tombol order: salin lalu buka TikTok */
+  document.getElementById("orderBtn").addEventListener("click", ()=>{
+    const ok = copySync(pesanOrder());
+    if(keranjang.length) toast(ok ? "\u2713 Pesanan tersalin \u2014 paste di DM TikTok" : "Buka TikTok, lalu tulis pesananmu");
+  });
+
+  /* kosongkan pilihan */
+  document.getElementById("clearBtn").addEventListener("click", ()=>{
+    keranjang.length = 0;
+    document.querySelectorAll(".item.sel").forEach(x=>x.classList.remove("sel"));
+    perbaruiBilah();
+    toast("Pilihan dikosongkan");
+  });
+
+  perbaruiBilah();
+})();
+</script>
+</body>
+</html>
