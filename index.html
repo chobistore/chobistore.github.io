@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chobistore — Top Up Robux &amp; Gamepass Roblox</title>
+<meta name="description" content="Top up Robux dan Gamepass Roblox — Pasar Hutan, Bloxburg, Evade. Aman, cepat, terpercaya. Tanpa password, harga jelas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chobistore — Top Up Robux &amp; Gamepass Roblox">
+<meta property="og:description" content="Harga jelas, tanpa password, proses cepat. 140+ transaksi sejak Agustus 2026.">
+<meta property="og:url" content="https://chobistore.github.io">
+<meta property="og:image" content="https://chobistore.github.io/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F2A9C9">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   KONFIGURASI — ubah di sini saja
+   ============================================================ */
+:root{
+  --bg:#F7F0FC; --bg2:#EFE3FA;
+  --card:#FFFFFF; --card2:#FBF5FE;
+  --ink:#4A2458; --ink2:#7A5C8C;
+  --accent:#F2A9C9;       /* permukaan pink: tombol, tab aktif, nomor langkah */
+  --on-accent:#693274;    /* teks di ATAS permukaan pink */
+  --accent-text:#B5407C;  /* teks/ikon pink di atas latar terang */
+  --accent-d:#693274;
+  --accent-kilau:#FDE3EE;   /* warna kilat saat tombol order ditekan */
+  --pill-a:#EADDF8; --pill-b:#FBDCEC;
+  --line:#E7D7F3;
+  --ok:#2E7D5B; --ok-bg:#DFF3E8;
+  --warn:#8A5A12; --warn-bg:#FDF0D5;
+  --shadow:0 2px 10px rgba(105,50,116,.07), 0 10px 30px rgba(105,50,116,.06);
+  --r:18px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1222; --bg2:#231730;
+    --card:#271A35; --card2:#2E1F3D;
+    --ink:#F2E6FA; --ink2:#BCA6CC;
+    --accent:#F2A9C9; --on-accent:#3A1430; --accent-text:#F4A8C9;
+    --accent-d:#E3C9F5;
+    --accent-kilau:#FFE1EF;
+    --pill-a:#3A2750; --pill-b:#45243C;
+    --line:#3C2A4E;
+    --ok:#8FE0B8; --ok-bg:#1E3A2C;
+    --warn:#F0CE8A; --warn-bg:#3A2D14;
+    --shadow:0 2px 10px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1222; --bg2:#231730;
+  --card:#271A35; --card2:#2E1F3D;
+  --ink:#F2E6FA; --ink2:#BCA6CC;
+  --accent:#F2A9C9; --on-accent:#3A1430; --accent-text:#F4A8C9;
+  --accent-d:#E3C9F5;
+  --accent-kilau:#FFE1EF;
+  --pill-a:#3A2750; --pill-b:#45243C;
+  --line:#3C2A4E;
+  --ok:#8FE0B8; --ok-bg:#1E3A2C;
+  --warn:#F0CE8A; --warn-bg:#3A2D14;
+  --shadow:0 2px 10px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none !important}   /* wajib: banyak elemen di sini pakai display:flex,
+                                       yang kalau tidak dikunci akan mengalahkan atribut hidden */
+html,body{margin:0;padding:0}
+body{
+  font-family:'Fredoka',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg); color:var(--ink);
+  font-size:16px; line-height:1.5;
+  padding-bottom:84px;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:inherit}
+
+/* ---------- header ---------- */
+header{
+  background:
+    radial-gradient(900px 340px at 10% -10%, var(--pill-b) 0%, transparent 60%),
+    radial-gradient(800px 320px at 95% 0%, var(--pill-a) 0%, transparent 62%),
+    var(--bg2);
+  padding:34px 0 28px; text-align:center; border-bottom:1px solid var(--line);
+}
+.logo{
+  font-size:clamp(34px,10vw,54px); font-weight:700; letter-spacing:-.5px;
+  margin:0; color:var(--accent-d); line-height:1.05;
+}
+.logo span{display:inline-block}
+.tag{margin:8px 0 0;color:var(--ink2);font-size:15px;font-weight:500}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.badge{
+  background:var(--card); border:1px solid var(--line); color:var(--ink);
+  padding:7px 13px; border-radius:999px; font-size:13px; font-weight:500;
+  box-shadow:var(--shadow);
+}
+
+/* ---------- notice ---------- */
+.notice{
+  margin:16px auto 0; max-width:828px;
+  background:var(--warn-bg); color:var(--warn);
+  border-radius:14px; padding:12px 15px; font-size:14px; font-weight:500;
+  display:flex; gap:9px; align-items:flex-start;
+}
+.notice b{font-weight:600}
+
+/* ---------- tabs ---------- */
+.tabs{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter:blur(10px) saturate(1.2);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);
+  border-bottom:1px solid var(--line); margin-top:20px;
+}
+.tabs-in{display:flex;gap:5px;max-width:860px;margin:0 auto;padding:10px 16px;overflow-x:auto;scrollbar-width:none}
+.tabs-in::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto; border:1px solid var(--line); background:var(--card);
+  color:var(--ink2); font-family:inherit; font-size:14px; font-weight:600;
+  padding:9px 12px; border-radius:999px; cursor:pointer; white-space:nowrap;
+  transition:.15s;
+}
+@media (max-width:430px){
+  .tabs-in{gap:4px;padding:10px 12px}
+  .tab{font-size:13px;padding:8px 10px}
+}
+@media (max-width:380px){
+  .tabs-in{gap:4px;padding:10px 10px}
+  .tab{font-size:12.5px;padding:8px 9px}
+}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* ---------- panel ---------- */
+.panel{display:none;padding-top:20px}
+.panel.on{display:block}
+.panel-head{margin:0 0 4px;font-size:20px;font-weight:600}
+.panel-sub{margin:0 0 14px;color:var(--ink2);font-size:14px}
+
+.grid{display:grid;gap:9px;grid-template-columns:1fr}
+@media(min-width:620px){.grid{grid-template-columns:1fr 1fr}}
+
+.item{
+  display:flex;align-items:center;gap:12px;width:100%;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:13px 14px; cursor:pointer; text-align:left;
+  font-family:inherit; color:inherit; box-shadow:var(--shadow);
+  transition:transform .12s, border-color .12s;
+}
+.item:hover{border-color:var(--accent)}
+.item:active{transform:scale(.985)}
+.item.sel{border-color:var(--accent);border-width:2px;background:var(--card2);padding:12px 13px}
+.item.sel .pr{background:var(--accent);color:var(--on-accent)}
+.cek{
+  flex:0 0 auto;width:22px;height:22px;border-radius:50%;
+  background:var(--accent);color:var(--on-accent);
+  display:none;place-items:center;font-size:13px;font-weight:700;line-height:1;
+}
+.item.sel .cek{display:grid}
+.qty{
+  flex:0 0 auto; min-width:76px; text-align:center;
+  background:var(--pill-a); border-radius:12px; padding:8px 10px;
+  font-weight:600; font-size:15px; color:var(--accent-d);
+}
+.nm{flex:1 1 auto;min-width:0;font-weight:500;font-size:15px;overflow:hidden}
+.nm small{display:block;color:var(--ink2);font-weight:400;font-size:12.5px;margin-top:1px}
+.pr{
+  flex:0 0 auto; margin-left:auto; background:var(--pill-b); border-radius:12px;
+  padding:8px 12px; font-weight:600; font-size:15px; color:var(--accent-d);
+  white-space:nowrap;
+}
+
+/* ---------- sections ---------- */
+section{padding:30px 0 4px}
+h2{font-size:20px;font-weight:600;margin:0 0 14px}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:10px}
+.steps li{
+  counter-increment:s; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r); padding:13px 15px 13px 52px; position:relative;
+  font-size:15px; box-shadow:var(--shadow);
+}
+.steps li::before{
+  content:counter(s); position:absolute; left:14px; top:50%; transform:translateY(-50%);
+  width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);
+  display:grid;place-items:center;font-size:14px;font-weight:700;
+}
+.steps b{font-weight:600}
+
+details{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+  padding:13px 15px; margin-bottom:9px; box-shadow:var(--shadow);
+}
+summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';float:right;color:var(--accent-text);font-weight:700}
+details[open] summary::after{content:'–'}
+details p{margin:9px 0 0;color:var(--ink2);font-size:14.5px}
+
+/* ---------- cta ---------- */
+.cta-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line); padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+}
+.cta-in{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:9px}
+
+/* kotak 1: ringkasan keranjang (bisa diketuk untuk lihat rincian) */
+.ringkas{display:flex;gap:8px;align-items:stretch}
+.ringkas-info{
+  flex:1 1 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:11px 14px;
+  font-family:inherit;font-size:14.5px;font-weight:600;color:var(--ink);cursor:pointer;text-align:left;
+}
+.ringkas-info .chev{color:var(--ink2);font-size:11px;transition:transform .18s}
+.ringkas-info[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.btn-x{
+  flex:0 0 auto;width:46px;background:var(--card);border:1px solid var(--line);
+  border-radius:13px;font-family:inherit;font-size:15px;color:var(--ink2);cursor:pointer;
+}
+.btn-x:active,.ringkas-info:active{transform:scale(.98)}
+
+/* rincian item di dalam keranjang */
+.daftar{
+  max-height:min(38vh,230px);overflow-y:auto;background:var(--card2);
+  border:1px solid var(--line);border-radius:13px;padding:5px;
+}
+.baris{display:flex;align-items:center;gap:10px;padding:8px 9px;font-size:14px}
+.baris+.baris{border-top:1px solid var(--line)}
+.baris .bn{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.baris .bn em{font-style:normal;color:var(--warn);font-size:12px}
+.baris .bh{flex:0 0 auto;font-weight:600;color:var(--accent-d)}
+.baris .bx{
+  flex:0 0 auto;background:none;border:none;color:var(--ink2);
+  font-family:inherit;font-size:16px;line-height:1;cursor:pointer;padding:2px 2px 2px 4px;
+}
+
+/* kotak 2 & 3: dua kanal order, lebar sama */
+.kanal{display:flex;gap:9px}
+.kanal .btn{flex:1 1 0}
+.btn-wa{background:var(--accent);color:var(--on-accent);border:2px solid transparent}
+.btn-tt{background:var(--accent);color:var(--on-accent);border:2px solid transparent}
+@media (max-width:360px){ .kanal .btn{font-size:14px;padding:13px 8px} }
+.btn{
+  flex:1 1 0; border:none; border-radius:14px; padding:14px 12px;
+  font-family:inherit; font-size:15px; font-weight:600; cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  text-decoration:none; transition:.15s;
+}
+.btn-main{background:var(--accent);color:var(--on-accent);border:2px solid transparent}
+.btn-alt{background:var(--card);color:var(--ink);border:2px solid var(--line);
+  flex:0 0 auto;padding:14px 18px;display:none}
+.btn-alt.on{display:flex}
+.btn-main{flex-direction:column;gap:1px;line-height:1.15}
+.btn-main .sub{font-weight:500;font-size:12.5px;opacity:.85}
+/* tombol kanal kedua (mis. TikTok saat WhatsApp jadi tombol utama) */
+.btn-side{background:var(--card);color:var(--ink);border:2px solid var(--line);
+  flex:0 0 auto;padding:14px 16px;font-size:14.5px}
+@media (max-width:380px){
+  .btn{padding:13px 10px;font-size:14.5px}
+  .btn-side{padding:13px 12px;font-size:13.5px}
+  .btn-alt{padding:13px 14px}
+}
+.btn:active{transform:scale(.98)}
+
+/* ---------- toast ---------- */
+#toast{
+  position:fixed;left:50%;bottom:calc(var(--barH,84px) + 12px);transform:translate(-50%,16px);
+  background:var(--ok-bg);color:var(--ok);border-radius:14px;
+  padding:12px 17px;font-size:14.5px;font-weight:600;z-index:60;
+  opacity:0;pointer-events:none;transition:.22s; max-width:92vw; text-align:center;
+  box-shadow:var(--shadow);
+}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+
+.stok{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--ok-bg);color:var(--ok);
+  border-radius:14px;padding:11px 14px;font-size:14px;font-weight:600;margin:0 0 14px}
+.stok.habis{background:var(--warn-bg);color:var(--warn)}
+.stok small{font-weight:400;opacity:.85;font-size:12.5px}
+.item.soft{opacity:.5}
+.item.soft .pr{background:var(--pill-a)}
+.tagx{flex:0 0 auto;background:var(--warn-bg);color:var(--warn);border-radius:9px;
+  padding:4px 8px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.calc{background:var(--card2);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px;margin:0 0 16px;box-shadow:var(--shadow)}
+.calc h3{margin:0 0 4px;font-size:16px;font-weight:600}
+.calc p.hint{margin:0 0 12px;color:var(--ink2);font-size:13.5px}
+.calc-row{display:flex;gap:9px;align-items:stretch}
+.calc input{flex:1 1 auto;min-width:0;font-family:inherit;font-size:16px;font-weight:600;
+  color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px}
+.calc input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.calc-out{margin-top:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px}
+.calc-out.on{display:flex}
+.calc-out .big{font-size:20px;font-weight:700;color:var(--accent-d)}
+.calc-out .lbl{color:var(--ink2);font-size:13.5px;flex:1 1 auto}
+.calc-msg{margin-top:10px;color:var(--warn);font-size:13.5px;font-weight:500;display:none}
+.calc-msg.on{display:block}
+footer{
+  margin-top:34px;padding:24px 0 30px;border-top:1px solid var(--line);
+  text-align:center;color:var(--ink2);font-size:13.5px
+}
+footer a{color:var(--accent-text);font-weight:600;text-decoration:none}
+.note{margin-top:8px;font-size:12.5px;opacity:.85}
+
+/* ============================================================
+   EFEK GERAK
+   Matikan semua lewat CONFIG.efek.aktif = false (lihat bagian script).
+   Otomatis mati juga kalau pengunjung menyalakan "kurangi gerak" di HP-nya.
+   ============================================================ */
+@keyframes naik{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes naikKecil{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pop{from{transform:scale(0) rotate(-35deg)}to{transform:scale(1) rotate(0)}}
+@keyframes denyut{0%{transform:scale(1)}40%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes riak{to{transform:scale(1);opacity:0}}
+@keyframes apungA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(9%,13%) scale(1.14)}}
+@keyframes apungB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-11%,9%) scale(1.09)}}
+@keyframes tekan{0%{transform:scale(1)}28%{transform:scale(.935)}100%{transform:scale(1)}}
+@keyframes kilau{
+  0%  {background-color:var(--accent)}
+  16% {background-color:var(--accent-kilau)}
+  100%{background-color:var(--accent)}
+}
+@keyframes redup{0%{opacity:1}28%{opacity:.45}100%{opacity:1}}
+
+/* 1. header: dua gumpalan warna yang melayang pelan di belakang judul */
+header{position:relative;overflow:hidden}
+header::before,header::after{
+  content:"";position:absolute;border-radius:50%;filter:blur(44px);
+  opacity:.38;pointer-events:none;z-index:0;
+}
+header::before{width:62vw;height:62vw;max-width:340px;max-height:340px;
+  background:var(--pill-b);left:-12%;top:-34%;animation:apungA 19s ease-in-out infinite}
+header::after{width:56vw;height:56vw;max-width:310px;max-height:310px;
+  background:var(--pill-a);right:-10%;top:-22%;animation:apungB 24s ease-in-out infinite}
+header .wrap{position:relative;z-index:1}
+
+/* 2. isi header muncul berurutan saat halaman dibuka */
+.logo,.tag,.badge{animation:naik .55s cubic-bezier(.22,1,.36,1) both}
+.tag{animation-delay:.08s}
+.badge:nth-child(1){animation-delay:.16s}
+.badge:nth-child(2){animation-delay:.23s}
+.badge:nth-child(3){animation-delay:.30s}
+
+/* 3. centang pada paket terpilih */
+.item.sel .cek{animation:pop .34s cubic-bezier(.34,1.56,.64,1)}
+
+/* 4. kotak keranjang & rinciannya */
+.ringkas{animation:naikKecil .3s ease-out}
+.daftar{animation:naikKecil .26s ease-out}
+#ringkasTeks{display:inline-block}
+#ringkasTeks.ganti{animation:denyut .32s ease-out}
+
+/* 5. tombol order: riak dari titik sentuh + pantulan saat ditekan */
+.btn-order{position:relative;overflow:hidden;isolation:isolate}
+.btn-order:active{transform:scale(.96)}
+/* yang dipilih: berkilat jadi pink muda lalu kembali, sambil memantul */
+.btn-order.tekan{
+  animation:tekan .42s cubic-bezier(.34,1.56,.64,1),
+            kilau .55s ease-out;
+}
+/* yang tidak dipilih: meredup sebentar, jadi pilihannya terlihat jelas */
+.btn-order.redup{animation:redup .55s ease-out}
+.riak{
+  position:absolute;border-radius:50%;background:currentColor;opacity:.3;
+  transform:scale(0);animation:riak .58s ease-out forwards;pointer-events:none;z-index:-1;
+}
+
+/* saklar mati total */
+.no-anim *,.no-anim *::before,.no-anim *::after{
+  animation:none !important;transition:none !important;
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1 class="logo">Chobistore</h1>
+    <p class="tag">Top up Robux &amp; Gamepass — aman, cepat, terpercaya</p>
+    <div class="badges">
+      <div class="badge">💜 140+ transaksi</div>
+      <div class="badge">📅 Sejak Agustus 2026</div>
+      <div class="badge">🔒 Tanpa password akun</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap"><div class="notice" id="notice" hidden></div></div>
+
+<nav class="tabs">
+  <div class="tabs-in" role="tablist" id="tabs"></div>
+</nav>
+
+<main class="wrap" id="panels"></main>
+
+<div class="wrap">
+  <section>
+    <h2>Cara order</h2>
+    <ol class="steps" id="langkah"></ol>
+  </section>
+
+  <section>
+    <h2>Pertanyaan umum</h2>
+    <details><summary>Perlu kasih password akun Roblox?</summary>
+      <p><b>Tidak pernah.</b> Cukup username Roblox kamu saja. Siapa pun yang meminta passwordmu — termasuk yang mengaku admin — sedang mencoba menipu.</p></details>
+    <details><summary>Berapa lama prosesnya?</summary>
+      <p>Biasanya langsung setelah pembayaran dikonfirmasi, selama stok tersedia dan admin sedang online.</p></details>
+    <details><summary>Kenapa paket kecil harganya lebih mahal per robux?</summary>
+      <p>Biaya kirim dan proses tiap transaksi sama saja, mau 10 robux atau 1.000. Makin besar paketnya, makin murah per robux-nya.</p></details>
+    <details><summary>Harganya bisa berubah?</summary>
+      <p>Bisa, mengikuti harga robux resmi dari Roblox. Harga yang berlaku adalah yang tertera di halaman ini saat kamu order.</p></details>
+    <details><summary>Bagaimana kalau stok sedang kosong?</summary>
+      <p>Akan ada pemberitahuan di bagian atas halaman ini. Kamu tetap bisa chat untuk tanya perkiraan waktu restock.</p></details>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p id="kontakFooter"></p>
+    <p class="note">Harga dapat berubah sewaktu-waktu mengikuti harga resmi Roblox.<br>Chobistore bukan bagian dari Roblox Corporation.</p>
+  </div>
+</footer>
+
+<div class="cta-bar">
+  <div class="cta-in">
+    <div class="ringkas" id="ringkas" hidden>
+      <button class="ringkas-info" id="ringkasBtn" type="button" aria-expanded="false" aria-controls="daftar">
+        <span id="ringkasTeks"></span><span class="chev">▼</span>
+      </button>
+      <button class="btn-x" id="clearBtn" type="button" title="Kosongkan pilihan">✕</button>
+    </div>
+    <div class="daftar" id="daftar" hidden></div>
+    <div class="kanal">
+      <a class="btn btn-order btn-wa" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Order via WhatsApp</a>
+      <a class="btn btn-order btn-tt" id="ttBtn" href="#" target="_blank" rel="noopener">Order via TikTok</a>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   DATA & KONFIGURASI
+   Ubah angka di sini saja. Jangan sentuh bagian bawah.
+   ============================================================ */
+const CONFIG = {
+  toko: "Chobistore",
+  tiktok: "chocobi31",
+
+  // NOMOR WHATSAPP — format internasional, tanpa tanda + dan tanpa 0 di depan.
+  //   0812-3456-7890  ->  "6281234567890"
+  // Selama masih "" tombol WhatsApp otomatis disembunyikan dan halaman
+  // tetap jalan normal dengan TikTok saja. Isi di sini saja, tidak ada
+  // tempat lain yang perlu diubah.
+  wa: "6289672395375",
+
+  // Banner pemberitahuan di atas halaman. aktif:false untuk menyembunyikan.
+  banner: {
+    aktif: false,   // <- stok robux sudah 10.000, banner restock dimatikan.
+                    //    Ubah ke true (dan ganti teksnya) kalau perlu lagi.
+    teks: "<b>Paket Robux sedang restock.</b> Gamepass Pasar Hutan, Bloxburg &amp; Evade tetap ready. Chat admin untuk perkiraan waktu."
+  },
+
+  // SISA STOK dalam robux. Perbarui tiap kali stok berubah.
+  // Item yang butuh robux lebih banyak dari stok otomatis ditandai "stok kurang".
+  stok: {
+    // Dua saklar terpisah:
+    tampilkanSisa: false,  // true = tampilkan strip "Stok tersedia: X Robux"
+    tandaiKurang: true,    // true = item yang melebihi stok diberi label pre-order
+    diperbarui: "8 Okt 2026",
+    robux: 10000,          // stok untuk paket robux langsung
+    pasarhutan: 2764,  // stok untuk gift gamepass Pasar Hutan
+    bloxburg: 2764,    // stok Bloxburg (kolam robux yang sama dengan Pasar Hutan)
+    evade: 2764        // stok Evade (kolam robux yang sama, Batch 2 Blaeum)
+  },
+
+  // Efek gerak di halaman. false = halaman jadi diam total.
+  efek: { aktif: true },
+
+  // Harga custom: bagian ratusan dihitung per robux, sisa di bawah 100 pakai tabel kecil.
+  // Contoh 150 robux = (100 x 165) + 50 -> 16.500 + 10.000 = 26.500
+  custom: {
+    aktif: true,
+    perRobux: 165,
+    min: 10,
+    maks: 10000,
+    kecil: {0:0, 10:2500, 20:4000, 30:6000, 40:8000, 50:10000, 60:12000, 70:13500, 80:14500, 90:15500},
+    perRobuxKecil: 200,
+    bulatkan: 500
+  }
+};
+
+const DATA = {
+  robux: {
+    label: "Robux",
+    judul: "Paket Robux",
+    sub: "Dikirim langsung ke akun Roblox kamu. Cukup username, tanpa password.",
+    satuan: "Robux",
+    items: [
+      [10, 2500], [20, 4000], [30, 6000], [40, 8000], [50, 10000],
+      [60, 12000], [70, 13500], [80, 14500], [90, 15500], [100, 16500],
+      [200, 33000], [300, 49500], [400, 66000], [500, 82500], [600, 99000],
+      [700, 115500], [800, 132000], [900, 148500], [1000, 165000]
+    ]
+  },
+  pasarhutan: {
+    label: "Pasar Hutan",
+    judul: "Gamepass Pasar Hutan",
+    sub: "Dikirim sebagai gift di dalam map. Pastikan kamu sedang online di game.",
+    items: [
+      ["Custom Title", 720, 119000], ["VIP Gamepass", 360, 59500],
+      ["Berkah Bumi", 360, 59500], ["Peternak Handal", 225, 37500],
+      ["Juru Masak Bayangan", 225, 37500], ["Kandang Luas", 135, 22500],
+      ["Boom Box Tools", 135, 22500], ["x2 Serpihan Arqwah", 135, 22500],
+      ["Bengkel Luas", 135, 22500], ["Langganan Pandai Besi", 135, 22500],
+      ["Nampan Bertuah", 117, 19500], ["Palung Bertuah", 90, 15500],
+      ["Slot Masak +5", 90, 15500], ["Koin +50%", 90, 15500],
+      ["Bundle Rental Legendaris +10", 81, 14000], ["Memasak Lebih Cepat", 63, 13000],
+      ["Rental Kapak Legendaris +10", 54, 11000], ["Rental Beliung Legendaris +10", 54, 11000],
+      ["EXP +50%", 45, 9000], ["2x Loot", 45, 9000],
+      ["Tungku Setan", 45, 9000], ["Tungku Berkah", 36, 7500]
+    ]
+  },
+  bloxburg: {
+    label: "Bloxburg",
+    judul: "Bloxburg",
+    sub: "Gamepass dan Bloxbux untuk Welcome to Bloxburg.",
+    groups: [
+      { nama: "Gamepass", items: [
+        ["Basements", 90, 15000], ["Marvelous Mood", 162, 26000],
+        ["Advanced Placing", 180, 29000], ["Large Plot", 225, 36000],
+        ["Excellent Employee", 270, 43500], ["Multiple Floors", 270, 43500],
+        ["Premium", 360, 58000], ["Transform Plus", 540, 86500]
+      ]},
+      { nama: "Bloxbux", items: [
+        ["50 Bloxbux", 14, 3000], ["250 Bloxbux", 63, 13000],
+        ["500 Bloxbux", 108, 17500], ["2.500 Bloxbux", 473, 76000],
+        ["5.000 Bloxbux", 878, 140500], ["25.000 Bloxbux", 4050, 648000]
+      ]}
+    ]
+  }
+,
+  evade: {
+    label: "Evade",
+    judul: "Gamepass Evade",
+    sub: "Dikirim sebagai gift di dalam game. Pastikan kamu sedang online di Evade.",
+    items: [
+      ["Military Set", 630, 104000], ["Classic Set", 540, 89500],
+      ["Animal Set", 540, 89500], ["Crystalline Set", 540, 89500],
+      ["Retro Cosmetics", 450, 74500], ["Music Emote Pack 2", 450, 74500],
+      ["Music Emotes Pack 1", 450, 74500], ["Future Pack", 360, 59500],
+      ["Music Carry Pack 1", 315, 52000], ["Emote Pack", 315, 52000],
+      ["Worlds Collide", 315, 52000], ["Boombox", 270, 45000],
+      ["+6 Emote Slots", 270, 45000]
+    ]
+  }
+};
+
+/* ============================================================
+   Mesin halaman — tidak perlu diubah saat memperbarui harga/stok
+   ============================================================ */
+const rp  = n => "Rp" + n.toLocaleString("id-ID");
+const num = n => n.toLocaleString("id-ID");
+
+/* ---------- kanal order ---------- */
+const TIKTOK  = "https://www.tiktok.com/@" + CONFIG.tiktok;
+const WA_NO   = String(CONFIG.wa || "").replace(/\D/g, "");
+const ADA_WA  = WA_NO.length >= 8;
+const waLink  = () => "https://wa.me/" + WA_NO + "?text=" + encodeURIComponent(pesanOrder());
+const waTampil = () => "+" + WA_NO;
+
+/* ---------- efek gerak ---------- */
+const EFEK = !(CONFIG.efek && CONFIG.efek.aktif === false);
+if(!EFEK) document.documentElement.classList.add("no-anim");
+
+/* paksa animasi berulang di elemen yang sama */
+function ulangi(el, anim){
+  if(!EFEK) return;
+  el.style.animation = "none";
+  void el.offsetWidth;
+  el.style.animation = anim;
+  el.addEventListener("animationend", ()=>{ el.style.animation = ""; }, {once:true});
+}
+
+/* item di sebuah panel muncul berurutan */
+function animasiPanel(p){
+  if(!EFEK) return;
+  [...p.querySelectorAll(".item")].slice(0, 14).forEach((el, i)=>{
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "naik .42s cubic-bezier(.22,1,.36,1) both";
+    el.style.animationDelay = (i * 26) + "ms";
+    // dilepas setelah selesai supaya efek tekan pada kartu tetap jalan
+    el.addEventListener("animationend", ()=>{
+      el.style.animation = ""; el.style.animationDelay = "";
+    }, {once:true});
+  });
+}
+
+/* lingkaran riak dari titik sentuh */
+function riak(ev, el){
+  if(!EFEK) return;
+  const r = el.getBoundingClientRect();
+  const d = Math.max(r.width, r.height) * 2.2;
+  const s = document.createElement("span");
+  s.className = "riak";
+  s.style.width = s.style.height = d + "px";
+  const x = (ev.clientX || r.left + r.width / 2) - r.left;
+  const y = (ev.clientY || r.top + r.height / 2) - r.top;
+  s.style.left = (x - d / 2) + "px";
+  s.style.top  = (y - d / 2) + "px";
+  el.appendChild(s);
+  setTimeout(()=>s.remove(), 620);
+}
+
+/* ---------- daftar pesanan ---------- */
+const keranjang = [];                       // {key, nama, harga, pre}
+const kartu     = new Map();                // key -> tombol paket di halaman
+const idx = k => keranjang.findIndex(x => x.key === k);
+
+/* buang satu item dari keranjang, sekalian lepas tanda centang di kartunya */
+function buang(key){
+  const i = idx(key);
+  if(i < 0) return;
+  keranjang.splice(i, 1);
+  const k = kartu.get(key);
+  if(k) k.classList.remove("sel");
+  perbaruiBilah();
+}
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("on");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>t.classList.remove("on"), 2200);
+}
+
+/* salin sinkron dulu: lebih aman saat disusul pindah halaman ke TikTok */
+function copySync(txt){
+  try{
+    const ta = document.createElement("textarea");
+    ta.value = txt; ta.setAttribute("readonly","");
+    ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, txt.length);
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    if(ok) return true;
+  }catch(e){}
+  try{
+    if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(txt); return true; }
+  }catch(e){}
+  return false;
+}
+
+function pesanOrder(){
+  if(!keranjang.length) return "Halo " + CONFIG.toko + ", saya mau tanya-tanya dulu.";
+  if(keranjang.length === 1){
+    const i = keranjang[0];
+    return "Halo " + CONFIG.toko + ", saya mau order " + i.nama + " \u2014 " + rp(i.harga) +
+           (i.pre ? " (pre-order, menunggu stok)" : "");
+  }
+  let t = "Halo " + CONFIG.toko + ", saya mau order:\n";
+  keranjang.forEach(i => { t += "\u2022 " + i.nama + " \u2014 " + rp(i.harga) + (i.pre ? " (pre-order)" : "") + "\n"; });
+  t += "Total: " + rp(keranjang.reduce((a,i)=>a+i.harga, 0));
+  return t;
+}
+
+/* tinggi bilah berubah-ubah (ringkasan & rincian), jadi ruang bawah ikut disesuaikan */
+function aturTinggiBilah(){
+  const bar = document.querySelector(".cta-bar");
+  if(!bar) return;
+  const h = bar.offsetHeight;
+  document.documentElement.style.setProperty("--barH", h + "px");
+  document.body.style.paddingBottom = (h + 16) + "px";
+}
+
+/* isi kotak rincian */
+function gambarDaftar(){
+  const d = document.getElementById("daftar");
+  d.innerHTML = "";
+  keranjang.forEach(it=>{
+    const r = document.createElement("div"); r.className = "baris";
+    const n = document.createElement("div"); n.className = "bn";
+    n.textContent = it.nama;
+    if(it.pre){ const e = document.createElement("em"); e.textContent = " \u00b7 pre-order"; n.appendChild(e); }
+    const h = document.createElement("div"); h.className = "bh"; h.textContent = rp(it.harga);
+    const x = document.createElement("button");
+    x.className = "bx"; x.type = "button"; x.textContent = "\u2715";
+    x.setAttribute("aria-label", "Hapus " + it.nama);
+    x.addEventListener("click", ()=>{ buang(it.key); toast(it.nama + " dihapus"); });
+    if(EFEK){
+      r.style.animation = "naik .3s cubic-bezier(.22,1,.36,1) both";
+      r.style.animationDelay = (d.childElementCount * 22) + "ms";
+    }
+    r.append(n, h, x);
+    d.appendChild(r);
+  });
+}
+
+function perbaruiBilah(){
+  const wa   = document.getElementById("waBtn");
+  const tt   = document.getElementById("ttBtn");
+  const ring = document.getElementById("ringkas");
+  const teks = document.getElementById("ringkasTeks");
+  const rbtn = document.getElementById("ringkasBtn");
+  const d    = document.getElementById("daftar");
+  const n    = keranjang.length;
+  const tot  = keranjang.reduce((a,i)=>a+i.harga, 0);
+
+  // kotak 1 — ringkasan keranjang, hanya muncul kalau ada isinya
+  ring.hidden = (n === 0);
+  if(n){
+    const baru = n + " item \u00b7 " + rp(tot);
+    if(teks.textContent !== baru){
+      teks.textContent = baru;
+      ulangi(teks, "denyut .32s ease-out");
+    }
+    if(rbtn.getAttribute("aria-expanded") === "true"){ gambarDaftar(); d.hidden = false; }
+  } else {
+    rbtn.setAttribute("aria-expanded", "false");
+    d.hidden = true; d.innerHTML = "";
+  }
+
+  // kotak 2 & 3 — tautan kanal, isi pesanan selalu yang terbaru
+  if(ADA_WA) wa.href = waLink();
+  aturTinggiBilah();
+}
+
+/* ---------- harga untuk jumlah robux bebas ---------- */
+function hargaCustom(n){
+  const c = CONFIG.custom;
+  const ratus = Math.floor(n/100)*100;
+  const sisa  = n - ratus;
+  let h = ratus * c.perRobux;
+  if(sisa > 0){
+    h += (sisa % 10 === 0 && c.kecil[sisa] !== undefined) ? c.kecil[sisa] : sisa * c.perRobuxKecil;
+  }
+  return Math.ceil(h / c.bulatkan) * c.bulatkan;
+}
+
+function stokDari(key){
+  const st = CONFIG.stok;
+  if(!st) return null;
+  if(!st.tampilkanSisa && !st.tandaiKurang) return null;
+  return (typeof st[key] === "number") ? st[key] : null;
+}
+const tandaiKurang  = () => !!(CONFIG.stok && CONFIG.stok.tandaiKurang);
+const tampilkanSisa = () => !!(CONFIG.stok && CONFIG.stok.tampilkanSisa);
+
+/* ---------- kartu item ---------- */
+function makeItem(key, nama, o, harga, stok){
+  const lebih  = (stok !== null && o.need && o.need > stok);
+  const kurang = lebih && tandaiKurang();
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "item" + (kurang ? " soft" : "");
+  if(o.qty){
+    const q = document.createElement("div"); q.className = "qty"; q.textContent = o.qty;
+    b.appendChild(q);
+  }
+  const n = document.createElement("div"); n.className = "nm";
+  n.textContent = o.nm;
+  if(kurang){
+    const sm = document.createElement("small");
+    sm.textContent = "pre-order"; sm.style.color = "var(--warn)";
+    n.appendChild(sm);
+  }
+  b.appendChild(n);
+  const ck = document.createElement("div"); ck.className = "cek"; ck.textContent = "\u2713";
+  b.appendChild(ck);
+  const p = document.createElement("div"); p.className = "pr"; p.textContent = rp(harga);
+  b.appendChild(p);
+
+  kartu.set(key, b);
+  b.addEventListener("click", ()=>{
+    if(idx(key) >= 0){
+      buang(key);
+      toast(nama + " dihapus");
+    } else {
+      keranjang.push({key, nama, harga, pre: lebih && tandaiKurang()});
+      b.classList.add("sel");
+      toast("\u2713 " + nama + " ditambahkan");
+      perbaruiBilah();
+    }
+  });
+  return b;
+}
+
+function buildGrid(list, kind, stok){
+  const g = document.createElement("div"); g.className = "grid";
+  list.forEach(row=>{
+    if(kind === "robux"){
+      const [jml, harga] = row;
+      g.appendChild(makeItem(kind+"|"+jml, num(jml) + " Robux",
+        {qty:num(jml), nm:"Robux", need:jml}, harga, stok));
+    } else {
+      const [nama, rbx, harga] = row;
+      g.appendChild(makeItem(kind+"|"+nama, nama, {qty:"", nm:nama, need:rbx||0}, harga, stok));
+    }
+  });
+  return g;
+}
+
+function stokStrip(stok){
+  const el = document.createElement("div");
+  const habis = stok <= 0;
+  el.className = "stok" + (habis ? " habis" : "");
+  el.innerHTML = habis
+    ? '<span>\u23F3</span><div>Stok sedang kosong \u2014 kamu tetap bisa pre-order, diproses begitu stok masuk. <small>Diperbarui ' + CONFIG.stok.diperbarui + '</small></div>'
+    : '<span>\u2705</span><div>Stok tersedia: ' + num(stok) + ' Robux <small>&nbsp;\u00B7 Diperbarui ' + CONFIG.stok.diperbarui + '</small></div>';
+  return el;
+}
+
+/* ---------- kalkulator jumlah bebas ---------- */
+function kalkulator(stok){
+  const c = CONFIG.custom;
+  const box = document.createElement("div"); box.className = "calc";
+  box.innerHTML =
+    '<h3>Jumlah lain?</h3>' +
+    '<p class="hint">Masukkan jumlah robux yang kamu mau, harganya muncul otomatis.</p>' +
+    '<div class="calc-row"><input id="cIn" type="number" inputmode="numeric" min="' + c.min + '" max="' + c.maks + '" placeholder="contoh: 150"></div>' +
+    '<div class="calc-out" id="cOut"><div class="big" id="cPrice"></div><div class="lbl" id="cLbl"></div>' +
+    '<button class="btn btn-main" id="cBtn" type="button" style="flex:0 0 auto;padding:11px 16px">Tambah</button></div>' +
+    '<div class="calc-msg" id="cMsg"></div>';
+
+  const inp = box.querySelector("#cIn"), out = box.querySelector("#cOut"),
+        pr = box.querySelector("#cPrice"), lbl = box.querySelector("#cLbl"),
+        btn = box.querySelector("#cBtn"), msg = box.querySelector("#cMsg");
+  let cur = 0, curH = 0;
+
+  function hitung(){
+    const v = parseInt(inp.value, 10);
+    msg.classList.remove("on"); out.classList.remove("on"); cur = 0;
+    if(!inp.value) return;
+    if(isNaN(v) || v < c.min){ msg.textContent = "Minimal " + c.min + " robux."; msg.classList.add("on"); return; }
+    if(v > c.maks){ msg.textContent = "Untuk di atas " + num(c.maks) + " robux, chat admin langsung ya."; msg.classList.add("on"); return; }
+    cur = v; curH = hargaCustom(v);
+    pr.textContent = rp(curH);
+    lbl.textContent = "untuk " + num(v) + " Robux";
+    out.classList.add("on");
+    if(stok !== null && v > stok && tandaiKurang()){
+      msg.textContent = tampilkanSisa()
+        ? "Stok saat ini " + num(stok) + " robux \u2014 jumlah ini jadi pre-order."
+        : "Jumlah ini melebihi stok saat ini \u2014 jadi pre-order, diproses begitu stok masuk.";
+      msg.classList.add("on");
+    }
+  }
+  inp.addEventListener("input", hitung);
+  btn.addEventListener("click", ()=>{
+    if(!cur) return;
+    const key = "custom|" + cur;
+    if(idx(key) >= 0){ toast(num(cur) + " Robux sudah ada di pesanan"); return; }
+    keranjang.push({key, nama: num(cur) + " Robux", harga: curH,
+                    pre: (stok !== null && cur > stok && tandaiKurang())});
+    perbaruiBilah();
+    toast("\u2713 " + num(cur) + " Robux ditambahkan");
+    inp.value = ""; out.classList.remove("on"); msg.classList.remove("on"); cur = 0;
+  });
+  return box;
+}
+
+/* ---------- susun halaman ---------- */
+(function build(){
+  const tabs = document.getElementById("tabs");
+  const panels = document.getElementById("panels");
+
+  Object.keys(DATA).forEach((k,i)=>{
+    const d = DATA[k];
+    const stok = stokDari(k);
+
+    const t = document.createElement("button");
+    t.className = "tab"; t.type = "button"; t.setAttribute("role","tab");
+    t.textContent = d.label; t.setAttribute("aria-selected", i===0 ? "true" : "false");
+    t.addEventListener("click", ()=>{
+      [...tabs.children].forEach(x=>x.setAttribute("aria-selected","false"));
+      t.setAttribute("aria-selected","true");
+      [...panels.children].forEach(x=>x.classList.remove("on"));
+      const aktif = document.getElementById("p-"+k);
+      aktif.classList.add("on");
+      animasiPanel(aktif);
+    });
+    tabs.appendChild(t);
+
+    const p = document.createElement("div");
+    p.className = "panel" + (i===0 ? " on" : ""); p.id = "p-"+k;
+    p.innerHTML = '<h2 class="panel-head">' + d.judul + '</h2><p class="panel-sub">' + d.sub + '</p>';
+    if(stok !== null && tampilkanSisa()) p.appendChild(stokStrip(stok));
+    if(k === "robux" && CONFIG.custom && CONFIG.custom.aktif) p.appendChild(kalkulator(stok));
+
+    if(d.groups){
+      d.groups.forEach(gr=>{
+        const h = document.createElement("p");
+        h.className = "panel-sub";
+        h.style.cssText = "font-weight:600;color:var(--ink);margin:18px 0 10px";
+        h.textContent = gr.nama;
+        p.appendChild(h); p.appendChild(buildGrid(gr.items, k, stok));
+      });
+    } else {
+      p.appendChild(buildGrid(d.items, k, stok));
+    }
+    panels.appendChild(p);
+  });
+
+  if(CONFIG.banner && CONFIG.banner.aktif){
+    const n = document.getElementById("notice");
+    n.innerHTML = "<span>\uD83D\uDCE6</span><div>" + CONFIG.banner.teks + "</div>";
+    n.hidden = false;
+  }
+
+  /* ---- kanal order ---- */
+  const wa = document.getElementById("waBtn");
+  const tt = document.getElementById("ttBtn");
+  tt.href = TIKTOK;
+
+  if(ADA_WA){
+    wa.hidden = false;
+    // WhatsApp: pesan sudah terisi lewat link, tidak perlu salin-tempel
+    wa.addEventListener("click", ()=>{
+      wa.href = waLink();                      // selalu pakai isi keranjang terbaru
+      if(keranjang.length) toast("\u2713 Membuka WhatsApp \u2014 pesanan sudah tertulis");
+    });
+  } else {
+    wa.hidden = true;
+    tt.className = "btn btn-wa";               // tanpa WhatsApp, TikTok jadi tombol utama
+  }
+
+  /* kotak ringkasan: ketuk untuk buka / tutup rincian item */
+  const rbtn = document.getElementById("ringkasBtn");
+  const dft  = document.getElementById("daftar");
+  rbtn.addEventListener("click", ()=>{
+    const buka = rbtn.getAttribute("aria-expanded") === "true";
+    rbtn.setAttribute("aria-expanded", String(!buka));
+    if(!buka) gambarDaftar();
+    dft.hidden = buka;
+    aturTinggiBilah();
+  });
+
+  // TikTok: tidak punya link DM, jadi pesan disalin dulu lalu profil dibuka
+  tt.addEventListener("click", ()=>{
+    const ok = copySync(pesanOrder());
+    if(keranjang.length) toast(ok ? "\u2713 Pesanan tersalin \u2014 paste di DM TikTok" : "Buka TikTok, lalu tulis pesananmu");
+  });
+
+  /* ---- langkah "Cara order", menyesuaikan kanal yang aktif ---- */
+  (function langkah(){
+    const li = ["<b>Ketuk paket</b> yang kamu mau \u2014 boleh lebih dari satu, dari tab mana pun"];
+    if(ADA_WA){
+      li.push("Cek keranjang di kotak bawah \u2014 ketuk untuk melihat rinciannya atau hapus item yang batal");
+      li.push("Pilih <b>Order via WhatsApp</b> (pesanan langsung tertulis, tinggal kirim) atau <b>Order via TikTok</b> (pesanan tersalin, paste di DM <b>@" + CONFIG.tiktok + "</b>)");
+    } else {
+      li.push("Tekan tombol <b>Order via TikTok</b> di bawah \u2014 daftar pesanan tersalin dan TikTok terbuka");
+      li.push("Tekan <b>Message</b> di profil <b>@" + CONFIG.tiktok + "</b>, lalu paste pesannya");
+    }
+    li.push("Transfer sesuai nominal, kirim bukti transfer dan username Roblox kamu");
+    document.getElementById("langkah").innerHTML = li.map(x => "<li>" + x + "</li>").join("");
+  })();
+
+  /* ---- kontak di footer ---- */
+  (function kontak(){
+    const bagian = [];
+    if(ADA_WA) bagian.push('WhatsApp <a href="https://wa.me/' + WA_NO + '" target="_blank" rel="noopener">' + waTampil() + '</a>');
+    bagian.push('TikTok <a href="' + TIKTOK + '" target="_blank" rel="noopener">@' + CONFIG.tiktok + '</a>');
+    document.getElementById("kontakFooter").innerHTML = bagian.join(" &nbsp;\u00b7&nbsp; ");
+  })();
+
+  /* kosongkan pilihan */
+  document.getElementById("clearBtn").addEventListener("click", ()=>{
+    keranjang.length = 0;
+    document.querySelectorAll(".item.sel").forEach(x=>x.classList.remove("sel"));
+    perbaruiBilah();
+    toast("Pilihan dikosongkan");
+  });
+
+  /* efek saat salah satu kotak order dipilih:
+     yang dipilih berkilat + memantul, yang satunya meredup sebentar */
+  const kanal = [wa, tt];
+  kanal.forEach(el=>{
+    el.addEventListener("click", ev=>{
+      riak(ev, el);
+      if(!EFEK) return;
+      kanal.forEach(lain=>{
+        lain.classList.remove("tekan", "redup");
+        void lain.offsetWidth;                       // reflow agar bisa diulang
+        lain.classList.add(lain === el ? "tekan" : "redup");
+      });
+    });
+    // "kilau" paling panjang, jadi dipakai sebagai penanda selesai
+    el.addEventListener("animationend", ev=>{
+      if(ev.animationName === "kilau" || ev.animationName === "redup"){
+        el.classList.remove("tekan", "redup");
+      }
+    });
+  });
+
+  const panelPertama = panels.querySelector(".panel.on");
+  if(panelPertama) animasiPanel(panelPertama);
+
+  window.addEventListener("resize", aturTinggiBilah);
+  perbaruiBilah();
+})();
+</script>
+</body>
+</html>
